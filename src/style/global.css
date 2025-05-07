@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --white: #eee;
+  --black: #111;
+
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+
+  --select-10: #2275f8;
+  --select-5: #364291;
+  --select-0: #121d57;
+
+  --font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+
+  font-family: var(--font-family);
+  color: var(--black);
+
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--white);
+}
+
+.icon {
+  font-family: "Material Symbols Rounded", sans-serif;
+  font-variation-settings: "FILL" 1;
+  font-size: 28px;
+  font-weight: 400;
+  user-select: none;
+}
