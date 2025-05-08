@@ -72,7 +72,7 @@ const layout = [
 const pieces = loadPiecesFromLayout(layout);
 
 
-let selectedPiece: Bishop | null = null;
+let selectedPiece: Piece | null = null;
 
 function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -90,14 +90,34 @@ canvas.addEventListener('click', (event) => {
     const x = Math.floor((event.clientX - rect.left) / tileSize);
     const y = Math.floor((event.clientY - rect.top) / tileSize);
 
+    const clickedPiece = pieces.find(p => p.x === x && p.y === y);
+
     if (selectedPiece) {
-        selectedPiece.move(x, y);
-        selectedPiece = null;
-    } else {
-        selectedPiece = pieces.find(p => p.x === x && p.y === y) || null;
+        // Try move or capture
+        if (clickedPiece && clickedPiece.black !== selectedPiece.black) {
+            // Capture
+            pieces.splice(pieces.indexOf(clickedPiece), 1);
+            selectedPiece.move(x, y);
+            selectedPiece.selected = false;
+            selectedPiece = null;
+        } else if (!clickedPiece) {
+            // Move to empty square
+            selectedPiece.move(x, y);
+            selectedPiece.selected = false;
+            selectedPiece = null;
+        } else {
+            // Clicked own piece again
+            selectedPiece.selected = false;
+            selectedPiece = null;
+        }
+    } else if (clickedPiece) {
+        // Select a piece
+        selectedPiece = clickedPiece;
+        selectedPiece.selected = true;
     }
 
     render();
 });
+
 
 render();
