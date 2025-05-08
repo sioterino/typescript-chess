@@ -16,7 +16,7 @@ class DOM {
     }
     
     public static redirectToLogin(): void {
-        window.location.href = "public/login.html";
+        window.location.href = "/login.html";
     }
 }
 

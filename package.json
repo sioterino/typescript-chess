@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "compile": "tsc --watch",
-    "preview": "vite preview"
+    "preview": "npm run compile & npm run dev"
   },
   "devDependencies": {
     "@types/node": "^22.15.13",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2"
   }
 }

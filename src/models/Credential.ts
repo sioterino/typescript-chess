@@ -2,6 +2,8 @@ import { Storage } from "../utils/Storage";
 import { IdGenerator } from "../utils/IdGenerator";
 import { DOM } from "../utils/DOM";
 
+import bcrypt from "bcryptjs";
+
 type UserCredential = {
   id: string;
   username: string;
@@ -45,7 +47,8 @@ class Credential {
       return false;
     }
 
-    return Storage.encode(password) === user.password;
+    // return Storage.encode(password) === user.password;
+    return bcrypt.compare(password, user.password)
   }
 
   protected getUsersData(): UserCredential[] | null {
@@ -104,7 +107,7 @@ class Register extends Credential {
       ?.addEventListener("submit", (e) => this.formSubmit(e, this.register));
   }
 
-  private register = (): void => {
+  private register = async (): Promise<void> => {
     if (this.verifyIfUserExists(this.data.username)) {
       console.log("Username already taken.");
       this.popUp();
@@ -116,7 +119,8 @@ class Register extends Credential {
     users.push({
       id: IdGenerator.createId(),
       username: this.data.username,
-      password: Storage.encode(this.data.password),
+      // password: Storage.encode(this.data.password),
+      password: await bcrypt.hash(this.data.password, 10),
       darkMode: false,
     });
 
