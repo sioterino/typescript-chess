@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
+  --board-border: #8f7f6e;
+  --bg: #2e2c2a;
+
   --white: #eee;
   --black: #111;
 
@@ -35,7 +38,16 @@
 }
 
 body {
-  background-color: var(--white);
+  background-color: var(--bg);
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  border: 12px solid var(--board-border);
 }
 
 .icon {
