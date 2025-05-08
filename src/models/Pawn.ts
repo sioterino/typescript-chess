@@ -1,21 +1,36 @@
 import { Piece } from "./Piece";
 
 class Pawn extends Piece {
-    constructor(x: number, y: number, black: boolean = false) {
+    constructor(x: number, y: number, black = false) {
         super('pawn', x, y, black);
     }
 
-    public move(xClick: number, yClick: number): void {
-        const xTarget = Math.floor(xClick);
-        const yTarget = Math.floor(yClick);
-        const direction = this.black ? 1 : -1;
+    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
+        if (this.isSameTeamOccupied(x, y, pieces)) return false;
 
-        if (xTarget === this.x && yTarget === this.y + direction) {
-            this.y = yTarget;
+        const dir = this.black ? 1 : -1;
+        const startRow = this.black ? 1 : 6;
+
+        const dx = x - this.x;
+        const dy = y - this.y;
+
+        const isBlocked = (x: number, y: number) =>
+            pieces.some(p => p.x === x && p.y === y);
+
+        if (dx === 0) {
+            if (dy === dir && !isBlocked(x, y)) return true;
+            if (this.y === startRow && dy === dir * 2 && !isBlocked(x, y) && !isBlocked(x, y - dir)) return true;
         }
+
+        if (Math.abs(dx) === 1 && dy === dir) {
+            const target = pieces.find(p => p.x === x && p.y === y);
+            if (target && target.black !== this.black) return true;
+        }
+
+        return false;
     }
 
-    public render(ctx: CanvasRenderingContext2D, tileSize: number): void {
+    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
         const img = new Image();
         img.src = this.img;
         img.onload = () => {

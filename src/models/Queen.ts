@@ -1,24 +1,26 @@
 import { Piece } from "./Piece";
+import { isPathClear } from "../utils/utils";
 
 class Queen extends Piece {
-    constructor(x: number, y: number, black: boolean = false) {
+    constructor(x: number, y: number, black = false) {
         super('queen', x, y, black);
     }
 
-    public move(xClick: number, yClick: number): void {
-        const xTarget = Math.floor(xClick);
-        const yTarget = Math.floor(yClick);
+    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
+        if (this.isSameTeamOccupied(x, y, pieces)) return false;
 
-        const dx = Math.abs(this.x - xTarget);
-        const dy = Math.abs(this.y - yTarget);
+        const dx = Math.abs(this.x - x);
+        const dy = Math.abs(this.y - y);
 
-        if (this.x === xTarget || this.y === yTarget || dx === dy) {
-            this.x = xTarget;
-            this.y = yTarget;
-        }
+        const straight = dx === 0 || dy === 0;
+        const diagonal = dx === dy;
+
+        if (!straight && !diagonal) return false;
+
+        return isPathClear(this.x, this.y, x, y, pieces);
     }
 
-    public render(ctx: CanvasRenderingContext2D, tileSize: number): void {
+    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
         const img = new Image();
         img.src = this.img;
         img.onload = () => {

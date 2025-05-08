@@ -1,22 +1,20 @@
 import { Piece } from "./Piece";
+import { isPathClear } from "../utils/utils";
 
 class Bishop extends Piece {
-
-    public constructor(x: number, y: number, black: boolean = false) {
-        super('bishop', x, y, black)
+    constructor(x: number, y: number, black = false) {
+        super('bishop', x, y, black);
     }
 
-    public move(xClick: number, yClick: number): void {
-        const xTarget = Math.floor(xClick)
-        const yTarget = Math.floor(yClick)
+    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
+        if (this.isSameTeamOccupied(x, y, pieces)) return false;
+        
+        if (Math.abs(this.x - x) !== Math.abs(this.y - y)) return false;
 
-        if (Math.abs(this.x - xTarget) === Math.abs(this.y - yTarget)) {
-            this.x = xTarget
-            this.y = yTarget
-        }
+        return isPathClear(this.x, this.y, x, y, pieces);
     }
 
-    public render(ctx: CanvasRenderingContext2D, tileSize: number): void {
+    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
         const img = new Image();
         img.src = this.img;
         img.onload = () => {
@@ -24,7 +22,6 @@ class Bishop extends Piece {
             ctx.drawImage(img, this.x * tileSize + (tileSize - size) / 2, this.y * tileSize + (tileSize - size) / 2, size, size);
         };
     }
-
 }
 
-export { Bishop }
+export { Bishop };

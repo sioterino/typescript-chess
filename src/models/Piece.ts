@@ -5,32 +5,29 @@ abstract class Piece {
 
     public black: boolean;
     public selected: boolean = false;
-
+    
     public img: string;
 
-    public constructor(type: string, x: number, y: number, black: boolean) {
-        this.x = x
-        this.y = y
-        this.black = black
-        this.img = this.getImagePath(type)
+    constructor(name: string, x: number, y: number, black: boolean = false) {
+        this.x = x;
+        this.y = y;
+        this.black = black;
+        this.img = `/src/assets/images/${name}${black ? '1' : ''}.png`;
     }
 
-    public toggleSelected(): void {
-        this.selected = !this.selected
+    public abstract canMoveTo(x: number, y: number, pieces: Piece[]): boolean;
+
+    public isSameTeamOccupied(x: number, y: number, pieces: Piece[]): boolean {
+        const piece = pieces.find(p => p.x === x && p.y === y);
+        return piece ? piece.black === this.black : false;
     }
 
-    public abstract move(xClick: number, yClick: number): void
-
-    public abstract render(ctx: CanvasRenderingContext2D, tileSize: number): void
-
-    protected getImagePath(type: string) {
-        if (this.black) {
-            return `/src/assets/images/${type}1.png`
-        } else {
-            return `/src/assets/images/${type}.png`
-        }
+    public move(x: number, y: number): void {
+        this.x = x;
+        this.y = y;
     }
 
+    public abstract render(ctx: CanvasRenderingContext2D, tileSize: number): void;
 }
 
-export { Piece }
+export { Piece };

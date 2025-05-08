@@ -1,21 +1,21 @@
 import { Piece } from "./Piece";
+import { isPathClear } from "../utils/utils";
 
 class Rook extends Piece {
-    constructor(x: number, y: number, black: boolean = false) {
+    constructor(x: number, y: number, black = false) {
         super('rook', x, y, black);
     }
 
-    public move(xClick: number, yClick: number): void {
-        const xTarget = Math.floor(xClick);
-        const yTarget = Math.floor(yClick);
+    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
+        if (this.isSameTeamOccupied(x, y, pieces)) return false;
 
-        if (this.x === xTarget || this.y === yTarget) {
-            this.x = xTarget;
-            this.y = yTarget;
-        }
+        const dx = Math.abs(this.x - x);
+        const dy = Math.abs(this.y - y);
+        if (dx !== 0 && dy !== 0) return false;
+        return isPathClear(this.x, this.y, x, y, pieces);
     }
 
-    public render(ctx: CanvasRenderingContext2D, tileSize: number): void {
+    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
         const img = new Image();
         img.src = this.img;
         img.onload = () => {
