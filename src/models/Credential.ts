@@ -60,10 +60,6 @@ class Credential {
 
     return users.find((user) => user[key] === value) || null;
   }
-
-  protected popUp(): void {
-    // password or user incorrect whatever
-  }
 }
 
 class Login extends Credential {
@@ -74,20 +70,22 @@ class Login extends Credential {
       ?.addEventListener("submit", (e) => this.formSubmit(e, this.login));
   }
 
-  private login = (): void => {
-    if (!this.verifyPassword(this.data.username, this.data.password)) {
-      console.log("Login credentials incorrect");
-      this.popUp();
+  private login = async (): Promise<void> => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const isValid = await this.verifyPassword(this.data.username, this.data.password);
+    
+    if (!isValid) {
+      DOM.popUp('Login credentials incorrect', true);
       return;
     }
-
+    
     const user = this.getUser("username", this.data.username);
-
     Storage.saveToSessionStorage("type-chess:session", user);
-    console.log("Login successful!");
 
     DOM.redirectToIndex();
   };
+  
 
   public logout = (): void => {
     sessionStorage.removeItem("type-chess:session");
@@ -105,8 +103,7 @@ class Register extends Credential {
 
   private register = async (): Promise<void> => {
     if (this.verifyIfUserExists(this.data.username)) {
-      console.log("Username already taken.");
-      this.popUp();
+      DOM.popUp('Username already taken', true)
       return;
     }
 
@@ -115,13 +112,12 @@ class Register extends Credential {
     users.push({
       id: IdGenerator.createId(),
       username: this.data.username,
-      // password: Storage.encode(this.data.password),
       password: await bcrypt.hash(this.data.password, 10),
       darkMode: false,
     });
 
     Storage.saveToLocalStorage("type-chess:users", users);
-    console.log("User registered successfully");
+    DOM.popUp('User registered successfully')
 
     DOM.toggleBetweenLoginAndRegister()
   };

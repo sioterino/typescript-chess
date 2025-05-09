@@ -1,0 +1,37 @@
+.popup {
+  position: fixed;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  width: fit-content;
+
+  padding: 0.3rem 1.5rem .3rem .8rem;
+  border-radius: 4rem;
+
+  max-width: var(--max-width);
+
+  pointer-events: none;
+  cursor: default;
+
+  transition: top 0.3s ease;
+}
+
+.popup p {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.popup .icon {
+  color: var(--white);
+  font-size: 1.8rem;
+}
+
+.popup-show {
+  top: 5%;
+}

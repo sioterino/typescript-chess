@@ -18,10 +18,12 @@
   --gray-800: #343a40;
   --gray-900: #212529;
 
-  --select-10: #4b8f3c;  /* Light green - like fresh leaves */
-  --select-5:  #2e5e2a;  /* Medium green - mossy and natural */
-  --select-0:  #1a421d;  /* Dark green - forest floor or deep woods */
-  
+  --select-10: #4b8f3c;
+  --select-5:  #2e5e2a; 
+  --select-0:  #1a421d;
+
+  --red: #fa4549;
+  --green: #3fb950;
 
   --font-family: "Inter", Helvetica, Arial, sans-serif;
 }

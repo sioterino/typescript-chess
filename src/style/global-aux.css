@@ -1,3 +1,11 @@
+.red {
+    background-color: var(--red);
+}
+
+.green {
+    background-color: var(--select-10);
+}
+
 .hide {
     display: none;
 }
@@ -6,3 +14,49 @@
     opacity: 0;
     pointer-events: none;
 }
+
+.music {
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+
+    outline: none;
+    offset: none;
+    border: none;
+  
+    padding: 0.2rem .6rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+  
+    background-color: var(--select-10);
+    color: var(--white);
+    border-bottom: 8px solid var(--select-5);
+  
+    font-size: 1rem;
+    font-weight: 700;
+  
+    cursor: pointer;
+    user-select: none;
+  
+    transition: all 0.18s ease-in-out;
+  }
+
+  .music .icon {
+    color: var(--white);
+    font-size: 1.6rem;
+  }
+  
+  .music:hover {
+    background-color: var(--select-5);
+    border-bottom: 8px solid var(--select-0);
+  }
+
+  .music:hover .music .icon {
+    color: var(--gray-900);
+  }
+  
+  .music:active {
+    transform: translateY(4px);
+    border-bottom: 0px solid var(--select-0);
+    background-color: var(--select-0);
+  }

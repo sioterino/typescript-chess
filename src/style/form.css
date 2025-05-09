@@ -12,6 +12,7 @@ body {
   padding: 2rem 1rem;
   border-radius: .25rem;
   border: 12px solid var(--board-border);
+  height: 22rem;
 }
 
 .login.container form,
@@ -98,6 +99,7 @@ button {
 
   background-color: var(--select-10);
   color: var(--white);
+  border-bottom: 8px solid var(--select-5);
 
   font-size: 1rem;
   font-weight: 700;
@@ -110,8 +112,11 @@ button {
 
 button:hover {
   background-color: var(--select-5);
+  border-bottom: 8px solid var(--select-0);
 }
 
 button:active {
+  transform: translateY(8px);
+  border-bottom: 0px solid var(--select-0);
   background-color: var(--select-0);
 }
