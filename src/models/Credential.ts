@@ -47,7 +47,6 @@ class Credential {
       return false;
     }
 
-    // return Storage.encode(password) === user.password;
     return bcrypt.compare(password, user.password)
   }
 
@@ -55,17 +54,14 @@ class Credential {
     return Storage.loadFromLocalStorage<UserCredential>("type-chess:users");
   }
 
-  protected getUser(
-    key: keyof UserCredential,
-    value: string
-  ): UserCredential | null {
+  protected getUser(key: keyof UserCredential, value: string): UserCredential | null {
     const users = this.getUsersData();
     if (!users) return null;
 
     return users.find((user) => user[key] === value) || null;
   }
 
-  protected popUp() {
+  protected popUp(): void {
     // password or user incorrect whatever
   }
 }

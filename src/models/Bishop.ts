@@ -1,27 +1,44 @@
-import { Piece } from "./Piece";
-import { isPathClear } from "../utils/utils";
+import { Chesspiece } from "./Chesspiece";
 
-class Bishop extends Piece {
-    constructor(x: number, y: number, black = false) {
-        super('bishop', x, y, black);
-    }
+/**
+ * REPRESENTS A BISHOP PIECE IN THE GAME OF CHESS.
+ * 
+ * The Bishop can move diagonally any number of squares, but only within its  tile color.
+ */
+class Bishop extends Chesspiece {
 
-    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
-        if (this.isSameTeamOccupied(x, y, pieces)) return false;
-        
-        if (Math.abs(this.x - x) !== Math.abs(this.y - y)) return false;
+  /**
+   * CONSTRUCTS A NEW BISHOP PIECE AND INITIALIZES ITS POSITION, COLOR, AND IMAGE.
+   * 
+   * @param {number} x - Initial X coordinate (column) on the chessboard.
+   * @param {number} y - Initial Y coordinate (row) on the chessboard.
+   * @param {boolean} [black=false] - Whether the Bishop is black (default is false, which means white).
+   */
+  constructor(x: number, y: number, black: boolean = false) {
+    super("bishop", x, y, black);
+  }
 
-        return isPathClear(this.x, this.y, x, y, pieces);
-    }
-
-    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
-        const img = new Image();
-        img.src = this.img;
-        img.onload = () => {
-            const size = tileSize * 0.8;
-            ctx.drawImage(img, this.x * tileSize + (tileSize - size) / 2, this.y * tileSize + (tileSize - size) / 2, size, size);
-        };
-    }
+  /**
+   * DETERMINES WHETHER THE BISHOP CAN MOVE TO A SPECIFIED DESTINATION (X, Y) ON THE CHESSBOARD.
+   * 
+   * A Bishop can move diagonally, so it checks:
+   * 1. Whether the destination is not occupied by a piece of the same team.
+   * 2. Whether the move is along a diagonal (i.e., the absolute difference in x and y must be equal).
+   * 3. Whether the path to the destination is clear (no pieces in between).
+   * 
+   * @param {number} x - Destination X coordinate (column).
+   * @param {number} y - Destination Y coordinate (row).
+   * @param {Chesspiece[]} pieces - List of all the pieces currently on the board.
+   * @returns {boolean} Returns true if the Bishop can legally move to (x, y).
+   */
+  canMoveTo(x: number, y: number, pieces: Chesspiece[]): boolean {
+    // check if the destination is occupied by a piece of the same team
+    if (this.isSameTeamOccupied(x, y, pieces)) return false;
+    // a bishop must move diagonally, so the absolute differences in x and y must be the same
+    if (Math.abs(this.x - x) !== Math.abs(this.y - y)) return false;
+    // check if the path to the destination is clear (no pieces blocking the way)
+    return this.isPathClear(x, y, pieces);
+  }
 }
 
 export { Bishop };

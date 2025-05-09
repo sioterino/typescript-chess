@@ -1,33 +1,56 @@
-import { Piece } from "./Piece";
-import { isPathClear } from "../utils/utils";
+import { Chesspiece } from "./Chesspiece";
 
-class Queen extends Piece {
-    constructor(x: number, y: number, black = false) {
-        super('queen', x, y, black);
-    }
+/**
+ * REPRESENTS A QUEEN PIECE IN THE GAME OF CHESS.
+ * 
+ * The queen can move any number of squares vertically, horizontally, or diagonally,
+ * as long as no pieces block her path.
+ */
+class Queen extends Chesspiece {
 
-    canMoveTo(x: number, y: number, pieces: Piece[]): boolean {
-        if (this.isSameTeamOccupied(x, y, pieces)) return false;
+  /**
+   * CONSTRUCTS A NEW QUEEN PIECE AND INITIALIZES ITS POSITION, COLOR, AND IMAGE.
+   * 
+   * @param {number} x - Initial X coordinate (column) on the chessboard.
+   * @param {number} y - Initial Y coordinate (row) on the chessboard.
+   * @param {boolean} [black=false] - Whether the Queen is black (default is false, which means white).
+   */
+  constructor(x: number, y: number, black: boolean = false) {
+    super("queen", x, y, black);
+  }
 
-        const dx = Math.abs(this.x - x);
-        const dy = Math.abs(this.y - y);
+  /**
+   * DETERMINES WHETHER THE QUEEN CAN MOVE TO THE SPECIFIED (X, Y) LOCATION.
+   * 
+   * The Queen combines the movement of both the Rook and Bishop:
+   * - Straight lines (horizontal or vertical)
+   * - Diagonals
+   * 
+   * Path must be clear, and destination cannot be occupied by a friendly piece.
+   * 
+   * @param {number} x - Destination X coordinate (column).
+   * @param {number} y - Destination Y coordinate (row).
+   * @param {Chesspiece[]} pieces - List of all the pieces currently on the board.
+   * @returns {boolean} Returns true if the Queen can legally move to (x, y).
+   */
+  canMoveTo(x: number, y: number, pieces: Chesspiece[]): boolean {
+    // check if the destination is occupied by a piece of the same team
+    if (this.isSameTeamOccupied(x, y, pieces)) return false;
 
-        const straight = dx === 0 || dy === 0;
-        const diagonal = dx === dy;
+    // calculate absolute differences in coordinates
+    const dx = Math.abs(this.x - x);
+    const dy = Math.abs(this.y - y);
 
-        if (!straight && !diagonal) return false;
+    // check if the move is in a straight line or diagonal
+    const straight = dx === 0 || dy === 0;
+    const diagonal = dx === dy;
 
-        return isPathClear(this.x, this.y, x, y, pieces);
-    }
+    // invalid move if not straight or diagonal
+    if (!straight && !diagonal) return false;
 
-    render(ctx: CanvasRenderingContext2D, tileSize: number): void {
-        const img = new Image();
-        img.src = this.img;
-        img.onload = () => {
-            const size = tileSize * 0.8;
-            ctx.drawImage(img, this.x * tileSize + (tileSize - size) / 2, this.y * tileSize + (tileSize - size) / 2, size, size);
-        };
-    }
+    // check if the path to the destination is clear (no pieces blocking the way)
+    return this.isPathClear(x, y, pieces);
+  }
 }
 
 export { Queen };
