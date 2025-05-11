@@ -207,10 +207,10 @@ classDiagram
 This project would not be possible without the following artists:
 
 ### Chess piece sprites
-Created by [Lucas312](https://opengameart.org/content/pixel-chess-pieces) — freely available on OpenGameArt.
+  * Created by [Lucas312](https://opengameart.org/content/pixel-chess-pieces) — freely available on OpenGameArt.
 
 ### Background Music
-SYMPHONY Nº 9 (Dvořák) 8-bit Remix by [Alejandro Samper Báidez](https://www.youtube.com/watch?v=EDx-2hNoQ0k)
+  * SYMPHONY Nº 9 (Dvořák) 8-bit Remix by [Alejandro Samper Báidez](https://www.youtube.com/watch?v=EDx-2hNoQ0k)
 
 > [!CAUTION]
 > These assets are for non-commercial use only unless the original license says otherwise. Always give credit when redistributing or modifying.
