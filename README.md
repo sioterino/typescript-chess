@@ -154,22 +154,22 @@ classDiagram
     class Credential {
         - data : UserCredential
         + constructor()
-        # formSubmit(e: Event, callback: Function) : void
-        # verifyIfUserExists(username: string) : boolean
-        # verifyPassword(username: string, password: string) : Promise<boolean>
-        # getUsersData() : UserCredential[] | null
-        # getUser(key: keyof UserCredential, value: string) : UserCredential | null
+        # formSubmit(e: Event, callback: Function)  void
+        # verifyIfUserExists(username: string)  boolean
+        # verifyPassword(username: string, password: string)  Promise<boolean>
+        # getUsersData()  UserCredential[] | null
+        # getUser(key: keyof UserCredential, value: string)  UserCredential | null
     }
 
     class Login {
         + constructor()
-        - login() : Promise<void>
-        + logout() : void
+        - login()  Promise<void>
+        + logout()  void
     }
 
     class Register {
         + constructor()
-        - register() : Promise<void>
+        - register()  Promise<void>
     }
 
     class UserCredential {
