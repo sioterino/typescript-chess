@@ -1,6 +1,7 @@
-# *Typescript* Chess
-A simple, canvas-rendered chess game built from scratch in *TypeScript* using the Oriented-Object Programming paradigm—designed for two players sharing the same machine. This project focuses on clean architecture, JSDoc-friendly code, and a component-based structure, all without the aid of frameworks or libraries beyond what's essential.
+<br><br>
+<h1  align="center"><i>Typescript</i> Chess</h1>
 
+A simple, canvas-rendered chess game built from scratch in *TypeScript* using the Oriented-Object Programming paradigm—designed for two players sharing the same machine. This project focuses on clean architecture, JSDoc-friendly code, and a component-based structure, all without the aid of frameworks or libraries beyond what's essential.
 > [!NOTE]
 > This project is offline-only for now. However, future updates may include online gameplay through sharable URL rooms.
 
@@ -51,15 +52,15 @@ A simple, canvas-rendered chess game built from scratch in *TypeScript* using th
     ├──README.md
     ├──src
     │   ├──assets
-    │   │   ├──images         # Chess piece assets (see credits)
-    │   │   └──sound          # 8-bit background music
-    │   ├──components         # UI-related modules
-    │   ├──core/              # Core logic (TBD or reserved)
-    │   ├──index.ts           # Main entrypoint
-    │   ├──login.ts           # Login flow
-    │   ├──models             # Chess pieces, board, credentials
-    │   ├──style              # CSS modules
-    │   └──utils              # Utility classes & helpers
+    │   │   ├──images          # Chess piece assets (see credits)
+    │   │   └──sound           # 8-bit background music
+    │   ├──components/         # UI-related modules
+    │   ├──core/               # Core logic (TBD)
+    │   ├──index.ts            # Main entrypoint
+    │   ├──login.ts            # Login flow
+    │   ├──models/             # Chess pieces, board, credentials
+    │   ├──style/              # CSS modules
+    │   └──utils/              # Utility classes & helpers
     └──tsconfig.json
 ```
 
