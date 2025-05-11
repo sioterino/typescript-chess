@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "compile": "tsc --watch",
-    "preview": "npm run compile & npm run dev"
+    "start": "npm run compile & npm run dev"
   },
   "devDependencies": {
     "@types/node": "^22.15.13",
